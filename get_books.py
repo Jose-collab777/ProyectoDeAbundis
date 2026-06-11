@@ -7,7 +7,7 @@ def get_links(n: int | list[int] = -1) -> tuple[list[str], list[str]]:
         response = requests.get(url)
         parser = BeautifulSoup(response.text, 'html.parser')
 
-        ### Introduzca su código ###
+
         header = parser.find("h2", string=lambda t: t and "Top 100 EBooks yesterday" in t)
         ol = header.find_next_sibling("ol")
         all_items = ol.find_all("a", href=True)
@@ -27,7 +27,7 @@ def get_links(n: int | list[int] = -1) -> tuple[list[str], list[str]]:
             titles.append(title + ".txt")
 
         return links, titles
-        ### Fin de su código ###
+
 
     except requests.exceptions.RequestException as e:
         print("wrong url for Gutenberg project")
