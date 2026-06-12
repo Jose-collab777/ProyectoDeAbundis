@@ -2,6 +2,19 @@ from libros import crear_lista_libros_ingles
 from recomendaciones import Recomendador
 
 def iniciar_menu():
+    """
+    Punto de entrada del sistema de recomendación de libros TF-IDF.
+
+    Carga los libros desde Books/, inicializa el Recomendador y presenta
+    un menú interactivo en bucle con tres opciones:
+      1. Ver palabras clave de un libro (resumen TF-IDF).
+      2. Recibir recomendaciones basadas en un libro.
+      3. Salir.
+
+    Para las opciones 1 y 2 solicita el índice del libro del catálogo
+    y la cantidad de resultados deseados.
+    """
+
     print("=" * 60)
     print("BIENVENIDO AL SISTEMA DE RECOMENDACION DE LIBROS TF-IDF")
     print("=" * 60)

@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+"""Obtiene URLs de descarga y nombres de archivo desde el ranking Top 100 EBooks yesterday de Gutenberg. Luego descarga los archivos de texto y los guarda en un directorio especificado."""
 def get_links(n: int | list[int] = -1) -> tuple[list[str], list[str]]:
     url = "https://www.gutenberg.org/browse/scores/top"
     try:
@@ -32,6 +33,7 @@ def get_links(n: int | list[int] = -1) -> tuple[list[str], list[str]]:
     except requests.exceptions.RequestException as e:
         print("wrong url for Gutenberg project")
 
+"""Descarga un archivo en chunks de 10 KB y lo guarda en disco."""
 def download_file(url, name, directory):
     response = requests.get(url, stream=True)
     name = directory + name
@@ -40,10 +42,12 @@ def download_file(url, name, directory):
             file.write(chunk)
     print(f"Downloaded file: {name}")
 
+"""Itera sobre listas paralelas de URLs/nombres y llama a download_file para cada par"""
 def store_files(links, names, directory='./'):
     for url, name in zip(links, names):
         download_file(url, name, directory)
 
+"""Funcion principal obtiene los links y descarga los archivos"""
 def main(n=-1, directory='./'):
     links, titles = get_links(n)
     store_files(links, titles, directory)
